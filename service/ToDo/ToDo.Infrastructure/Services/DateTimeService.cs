@@ -7,7 +7,7 @@ using ToDo.Application.Common.Services;
 
 namespace ToDo.Infrastructure.Services;
 
-public class DataTimeService : IDateTimeService
+public class DateTimeService : IDateTimeService
 {
     public DateTime UtcNow => DateTime.UtcNow;
 }

@@ -18,7 +18,7 @@ public static class ConfigureServices
     public static IServiceCollection AddInftrastructure(this IServiceCollection services)
     {
         services.AddDbContext<ToDoContext>(options => options.UseInMemoryDatabase("InMemoryDb"));
-        services.AddSingleton<IDateTimeService, DataTimeService>();
+        services.AddSingleton<IDateTimeService, DateTimeService>();
         services.AddScoped<ITodoItemRepository, TodoItemRepository>();
 
         return services;
