@@ -6,8 +6,23 @@ using ToDo.Application.Features.TodoItems.Queries;
 using Microsoft.AspNetCore.Mvc;
 using ToDo.Api.EndpointDefinitions;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
 {
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(MyAllowSpecificOrigins,
+                              policy =>
+                              {
+                                  policy
+                                    //.WithOrigins("http://localhost:3000")
+                                    .AllowAnyOrigin()
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod();
+                              });
+    });
+
     builder.Services
         .AddInftrastructure()
         .AddApplication();
@@ -25,7 +40,10 @@ var app = builder.Build();
         app.UseSwaggerUI();
     }
 
-    app.UseHttpsRedirection();
+    app.UseCors(MyAllowSpecificOrigins);
+
+    //TODO: 
+    //app.UseHttpsRedirection();
 
     app.RegisterEndpointDefinitions();
 
