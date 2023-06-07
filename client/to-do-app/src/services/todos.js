@@ -16,6 +16,37 @@ export async function fetchTodos() {
     }
 }
 
+export async function fetchTodo(id) {
+    try {
+        const res = await fetch(`${BASE_URL}/${id}`, {
+            cache: 'no-store',
+        });
+        
+        return res.json();
+    } catch (error) {
+        console.log(error);
+        throw new Error("Error happened while fetching todo", error);
+    }
+}
+
+export async function updateTodo(id, content) {
+    try {
+        const res = await fetch(`${BASE_URL}/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                content: content
+            })
+        });
+        return res.ok;
+    } catch (error) {
+        console.log(error);
+        throw new Error("Error happened while updating todo", error);
+    }
+}
+
 export const addTodo = async (content) => {
     try {
         const res = await fetch(`${BASE_URL}`, {

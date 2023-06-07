@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import SimpleGrid from '@/components/simple-grid';
 import Card from '@/components/card';
 import CardHeader from '@/components/card-header';
@@ -7,8 +8,10 @@ import CardFooter from '@/components/card-footer';
 import Button from '@/components/button';
 import Heading from '@/components/heading';
 import Text from '@/components/text';
+import TodoItem from '@/components/todo-item';
 
 const TodoListContainer = ({ todos }) => {
+
     return (
         <div>
             <SimpleGrid mt={5} spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
@@ -24,14 +27,7 @@ const TodoListContainer = ({ todos }) => {
                     </CardFooter>
                 </Card>
                 {todos.map((todo) => (
-                    <Card key={todo.id}>
-                        <CardBody>
-                            <Text>{todo.content}</Text>
-                        </CardBody>
-                        <CardFooter>
-                            <Button>Go</Button>
-                        </CardFooter>
-                    </Card>
+                    <TodoItem key={todo.id} todo={todo} />
                 ))}
             </SimpleGrid>
         </div>

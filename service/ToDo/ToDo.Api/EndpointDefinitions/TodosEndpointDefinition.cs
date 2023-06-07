@@ -44,5 +44,20 @@ public class TodosEndpointDefinition : IEndpointDefinition
         })
         .WithName("AddTodo")
         .WithOpenApi();
+
+        todos.MapPut("/{id}", async (IMediator mediator, [FromRoute] Guid id, [FromBody] UpdateTodoRequest updateTodoRequest) =>
+        {
+            var todo = await mediator.Send(new UpdateTodoCommand(
+                Id: id,
+                Content: updateTodoRequest.Content
+            ));
+
+            //TODO: handle not found
+            return TypedResults.NoContent();
+        })
+        .WithName("UpdateTodo")
+        .WithOpenApi();
     }
+
+    record UpdateTodoRequest(string Content);
 }
