@@ -10,7 +10,7 @@ namespace ToDo.Application.Features.TodoItems;
 public interface ITodoItemRepository
 {
     Task<ICollection<ToDoItem>> GetTodos();
-    Task<ToDoItem> GetTodo(Guid id);
+    Task<ToDoItem?> GetTodo(Guid id);
     Task<ToDoItem> AddTodo(ToDoItem todoItem);
     Task<ToDoItem> UpdateTodo(Guid todoId, string content);
     Task DeleteTodo(Guid id);

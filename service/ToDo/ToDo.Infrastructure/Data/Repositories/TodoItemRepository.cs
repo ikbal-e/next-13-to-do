@@ -36,7 +36,7 @@ public class TodoItemRepository : ITodoItemRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<ToDoItem> GetTodo(Guid id)
+    public async Task<ToDoItem?> GetTodo(Guid id)
     {
         return await _context.ToDoItems.Where(x => x.Id == id).FirstOrDefaultAsync();
     }
